@@ -17,41 +17,27 @@ public class Kantine {
      * voor de kassa.
      */
     public void loopPakSluitAan() {
-        // method body omitted
+
+        Dienblad dienblad = new Dienblad(new Persoon());
+        Artikel artikel1 = new Artikel();
+        Artikel artikel2 = new Artikel();
+
+        dienblad.voegToe(artikel1);
+        dienblad.voegToe(artikel2);
+
+        kassarij.sluitAchteraan(dienblad);
     }
 
     /**
      * Deze methode handelt de rij voor de kassa af.
      */
     public void verwerkRijVoorKassa() {
-        //while () {
-            // omitted
+        while (kassarij.erIsEenRij()) {
+            kassa.rekenAf(kassarij.eerstePersoonInRij());
         }
     }
 
-    /**
-     * Deze methode telt het geld uit de kassa
-     *
-     * @return hoeveelheid geld in kassa
-     */
-    public double hoeveelheidGeldInKassa() {
-        // method body omitted
-    }
-
-    /**
-     * Deze methode geeft het aantal gepasseerde artikelen.
-     *
-     * @return het aantal gepasseerde artikelen
-     */
-    public int aantalArtikelen() {
-        // method body omitted
-    }
-
-    /**
-     * Deze methode reset de bijgehouden telling van het aantal artikelen en "leegt" de inhoud van
-     * de kassa.
-     */
-    public void resetKassa() {
-        // method body omitted
+    public Kassa getKassa(){
+        return kassa;
     }
 }
