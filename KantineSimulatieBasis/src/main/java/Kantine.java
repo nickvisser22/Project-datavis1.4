@@ -1,14 +1,18 @@
 public class Kantine {
 
     private Kassa kassa;
-    private KassaRij kassarij;
-
+    public KassaRij kassarij;
+    private KantineAanbod kantineAanbod;
     /**
      * Constructor
      */
     public Kantine() {
         kassarij = new KassaRij();
         kassa = new Kassa(kassarij);
+    }
+
+    public void setKantineAanbod(KantineAanbod kantineAanbod){
+        this.kantineAanbod = kantineAanbod;
     }
 
     /**
