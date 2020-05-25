@@ -9,7 +9,6 @@ public class Kassa {
      * Constructor
      */
     public Kassa(KassaRij kassarij) {
-        // method body omitted
     }
 
     /**
@@ -20,11 +19,25 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        // method body omitted
-        totaalArtikelen += klant.getAantalArtikelen();
-        totaalGeld += klant.getTotaalPrijs();
+        totaalArtikelen += getAantalArtikelen(klant);
+        totaalGeld += getTotaalPrijs(klant);
     }
 
+    private int getAantalArtikelen(Dienblad klant){
+        int artikelenDienblad = 0;
+        for (int i = 0; i < klant.artikelen.size(); i++){
+            artikelenDienblad++;
+        }
+        return artikelenDienblad;
+    }
+
+    private double getTotaalPrijs(Dienblad klant){
+        double totaalPrijs = 0.0;
+        for(Artikel artikel : klant.artikelen){
+            totaalPrijs += artikel.getPrijs();
+        }
+        return totaalPrijs;
+    }
     /**
      * Geeft het aantal artikelen dat de kassa heeft gepasseerd, vanaf het moment dat de methode
      * resetWaarden is aangeroepen.
@@ -32,7 +45,6 @@ public class Kassa {
      * @return aantal artikelen
      */
     public int aantalArtikelen() {
-        // method body omitted
         return totaalArtikelen;
     }
 
@@ -43,7 +55,6 @@ public class Kassa {
      * @return hoeveelheid geld in de kassa
      */
     public double hoeveelheidGeldInKassa() {
-        // method body omitted
         return totaalGeld;
     }
 
@@ -52,7 +63,6 @@ public class Kassa {
      * kassa.
      */
     public void resetKassa() {
-        // method body omitted
         totaalGeld = 0;
         totaalArtikelen = 0;
     }
