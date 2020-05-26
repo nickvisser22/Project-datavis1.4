@@ -2,11 +2,12 @@ public class Kantine {
 
     private Kassa kassa;
     private KassaRij kassarij;
+    private KantineAanbod kantineAanbod;
 
     /**
      * Constructor
      */
-    public Kantine() {
+    public Kantine () {
         kassarij = new KassaRij();
         kassa = new Kassa(kassarij);
     }
@@ -16,14 +17,11 @@ public class Kantine {
      * Artikelen aan en plaats deze op het dienblad. Tenslotte sluit de Persoon zich aan bij de rij
      * voor de kassa.
      */
-    public void loopPakSluitAan() {
+    public void loopPakSluitAan (Dienblad dienblad, String[] artikelnamen) {
 
-        Dienblad dienblad = new Dienblad(new Persoon());
-        Artikel artikel1 = new Artikel();
-        Artikel artikel2 = new Artikel();
-
-        dienblad.voegToe(artikel1);
-        dienblad.voegToe(artikel2);
+        for (String artikel: artikelnamen) {
+            dienblad.voegToe(new Artikel(artikel));
+        }
 
         kassarij.sluitAchteraan(dienblad);
     }
@@ -31,13 +29,30 @@ public class Kantine {
     /**
      * Deze methode handelt de rij voor de kassa af.
      */
-    public void verwerkRijVoorKassa() {
+    public void verwerkRijVoorKassa () {
         while (kassarij.erIsEenRij()) {
             kassa.rekenAf(kassarij.eerstePersoonInRij());
         }
     }
 
-    public Kassa getKassa(){
+    public Kassa getKassa (){
         return kassa;
+    }
+
+    /**
+     * Set het kantineAanbod
+     * @param kantineAanbod Het kantine aanbod om toe te voegen
+     */
+    public void setKantineAanbod (KantineAanbod kantineAanbod) {
+        this.kantineAanbod = kantineAanbod;
+    }
+
+    /**
+     * Geeft het kantineAanbod terug
+     *
+     * @return kantineAanbod
+     */
+    public KantineAanbod getKantineAanbod() {
+        return kantineAanbod;
     }
 }

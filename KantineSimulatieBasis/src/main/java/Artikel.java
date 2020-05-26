@@ -8,8 +8,8 @@ public class Artikel {
         this.prijs = prijs;
     }
 
-    public Artikel(){
-        naam = "";
+    public Artikel(String naam){
+        this.naam = naam;
         prijs = 0;
     }
 
