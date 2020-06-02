@@ -22,10 +22,10 @@ public class Persoon {
         }
     }
     public Persoon(){
-        bsn = 000000000;
+        bsn = 00000000;
         voornaam = "";
         achternaam = "";
-        geboortedatum = null;
+        geboortedatum = new Datum();
         geslacht = 'O';
     }
 
@@ -87,9 +87,11 @@ public class Persoon {
         String b = getVoornaam() + ", ";
         String c = getAchternaam() + ", ";
         String d = getGeboortedatum() + ", ";
-        String e = getGeslacht();
+        String e = getGeslacht() + ", ";
 
-        return a + b + c + d + e;
+        String persoon = String.valueOf(getClass());
+
+        return a + b + c + d + e + persoon;
     }
 }
 
