@@ -60,6 +60,7 @@ public class KantineAanbod {
             stapel.remove(0);
             if (stapel.size() <= 10)
                 vulVoorraadAan(a.getNaam());
+
             return a;
         }
     }

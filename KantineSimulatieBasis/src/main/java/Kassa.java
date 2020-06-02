@@ -23,6 +23,7 @@ public class Kassa {
         totaalGeld += getTotaalPrijs(klant);
     }
 
+    //returns aantal artikelen op dienblad
     private int getAantalArtikelen(Dienblad klant){
         int artikelenDienblad = 0;
         for (int i = 0; i < klant.artikelen.size(); i++){
@@ -31,6 +32,7 @@ public class Kassa {
         return artikelenDienblad;
     }
 
+    //returns totaalprijs van alle artikelen op dienblad
     private double getTotaalPrijs(Dienblad klant){
         double totaalPrijs = 0.0;
         for(Artikel artikel : klant.artikelen){

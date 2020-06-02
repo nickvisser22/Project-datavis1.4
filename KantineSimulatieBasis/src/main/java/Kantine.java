@@ -15,20 +15,20 @@ public class Kantine {
         this.kantineAanbod = kantineAanbod;
     }
 
+    public KantineAanbod getKantineAanbod(){
+        return kantineAanbod;
+    }
+
     /**
      * In deze methode wordt een Persoon en Dienblad gemaakt en aan elkaar gekoppeld. Maak twee
      * Artikelen aan en plaats deze op het dienblad. Tenslotte sluit de Persoon zich aan bij de rij
      * voor de kassa.
      */
-    public void loopPakSluitAan() {
+    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen) {
 
-        Dienblad dienblad = new Dienblad(new Persoon());
-        Artikel artikel1 = new Artikel();
-        Artikel artikel2 = new Artikel();
-
-        dienblad.voegToe(artikel1);
-        dienblad.voegToe(artikel2);
-
+        for (String artikelnaam : artikelnamen){
+            kantineAanbod.getArtikel(artikelnaam);
+        }
         kassarij.sluitAchteraan(dienblad);
     }
 
