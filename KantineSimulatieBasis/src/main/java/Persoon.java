@@ -5,6 +5,7 @@ public class Persoon {
     private String achternaam;
     private Datum geboortedatum;
     private char geslacht;
+    private Betaalwijze betaalwijze;
 
     public Persoon(int bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht){
         this.bsn = bsn;
@@ -54,6 +55,10 @@ public class Persoon {
         }
     }
 
+    public void setBetaalwijze(Betaalwijze betaalwijze) {
+        this.betaalwijze = betaalwijze;
+    }
+
     public int getBsn(){
         return bsn;
     }
@@ -66,8 +71,8 @@ public class Persoon {
         return achternaam;
     }
 
-    public String getGeboortedatum() {
-        return geboortedatum.getDatumAsString();
+    public Datum getGeboortedatum() {
+        return geboortedatum;
     }
 
     public String getGeslacht() {
@@ -81,12 +86,13 @@ public class Persoon {
             return "Onbekend";
         }
     }
+    public Betaalwijze getBetaalwijze() {return betaalwijze;}
 
     public String toString(){
         String a = getBsn() + ", ";
         String b = getVoornaam() + ", ";
         String c = getAchternaam() + ", ";
-        String d = getGeboortedatum() + ", ";
+        String d = getGeboortedatum().getDatumAsString() + ", ";
         String e = getGeslacht() + ", ";
 
         String persoon = String.valueOf(getClass());

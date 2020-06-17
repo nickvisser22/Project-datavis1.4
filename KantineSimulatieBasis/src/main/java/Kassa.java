@@ -5,6 +5,7 @@ public class Kassa {
 
     private double totaalGeld;
     private int totaalArtikelen;
+    private KortingskaartHouder kortingskaartHouder;
     /**
      * Constructor
      */
@@ -19,8 +20,38 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        totaalArtikelen += getAantalArtikelen(klant);
-        totaalGeld += getTotaalPrijs(klant);
+        double korting;
+        if (klant.getKlant() instanceof KortingskaartHouder) {
+            if (((KortingskaartHouder) klant.getKlant()).heeftMaximum()) {
+                if (getTotaalPrijs(klant) * ((KortingskaartHouder) klant.getKlant()).geefKortingsPercentage() > 1.00) {
+                    korting = ((KortingskaartHouder) klant.getKlant()).geefMaximum();
+                }else {
+                    korting = getTotaalPrijs(klant) * ((KortingskaartHouder) klant.getKlant()).geefKortingsPercentage();
+                }
+                if (klant.getKlant().getBetaalwijze().betaal(getTotaalPrijs(klant) - korting)) {
+                        totaalGeld += getTotaalPrijs(klant) - korting;
+                        totaalArtikelen += getAantalArtikelen(klant);
+                } else {
+                        System.out.println("Te weinig saldo");
+                }
+            } else {
+                korting = getTotaalPrijs(klant) * ((KortingskaartHouder) klant.getKlant()).geefKortingsPercentage();
+                if (klant.getKlant().getBetaalwijze().betaal(getTotaalPrijs(klant) - korting)) {
+                    totaalGeld += getTotaalPrijs(klant) - korting;
+                    totaalArtikelen += getAantalArtikelen(klant);
+
+                } else {
+                    System.out.println("Te weinig saldo");
+                }
+            }
+        }else {
+            if (klant.getKlant().getBetaalwijze().betaal(getTotaalPrijs(klant))) {
+                totaalGeld += getTotaalPrijs(klant);
+                totaalArtikelen += getAantalArtikelen(klant);
+            } else {
+                System.out.println("Te weinig saldo");
+            }
+        }
     }
 
     //returns aantal artikelen op dienblad

@@ -96,6 +96,22 @@ public class KantineSimulatie {
         return artikelen;
     }
 
+
+    private void addBetaalwijze(Dienblad dienblad){
+        switch (random.nextInt(2)) {
+            case 0:
+                dienblad.getKlant().setBetaalwijze(new Contant());
+                dienblad.getKlant().getBetaalwijze().setSaldo(random.nextInt(100));
+            case 1:
+                dienblad.getKlant().setBetaalwijze(new Pinpas());
+                dienblad.getKlant().getBetaalwijze().setSaldo(random.nextInt(100));
+                if (dienblad.getKlant().getBetaalwijze() instanceof Pinpas){
+                    ((Pinpas) dienblad.getKlant().getBetaalwijze()).setKredietLimiet(random.nextInt(20));
+                }
+                break;
+        }
+    }
+
     /**
      * Deze methode simuleert een aantal dagen
      * in het verloop van de kantine
@@ -130,6 +146,7 @@ public class KantineSimulatie {
 
                 if(rand > 10) {
                     Dienblad dienblad = new Dienblad(new Student());
+                        addBetaalwijze(dienblad);
                     for (int x = 0; x < aantalartikelen; x++) {
                         dienblad.voegToe(new Artikel(artikelen[x], artikelprijzen[tepakken[x]]));
                     }
@@ -137,6 +154,7 @@ public class KantineSimulatie {
                     System.out.println(dienblad.getKlant().toString());
                 }else if(rand > 0){
                     Dienblad dienblad = new Dienblad(new Docent());
+                    addBetaalwijze(dienblad);
                     for (int x = 0; x < aantalartikelen; x++) {
                         dienblad.voegToe(new Artikel(artikelen[x], artikelprijzen[tepakken[x]]));
                     }
@@ -144,6 +162,7 @@ public class KantineSimulatie {
                     System.out.println(dienblad.getKlant().toString());
                 }else{
                     Dienblad dienblad = new Dienblad(new Kantinemedewerker());
+                    addBetaalwijze(dienblad);
                     for (int x = 0; x < aantalartikelen; x++) {
                         dienblad.voegToe(new Artikel(artikelen[x], artikelprijzen[tepakken[x]]));
                     }
@@ -151,7 +170,8 @@ public class KantineSimulatie {
                     System.out.println(dienblad.getKlant().toString());
                 }
 
-                    // loop de kantine binnen, pak de gewenste artikelen, sluit aan
+
+            // loop de kantine binnen, pak de gewenste artikelen, sluit aan
                     // artikelen[x] kan ook vervangen worden door artikelnamen[tepakken[x]]
 //                    for (int x = 0; x < aantalartikelen; x++) {
 //                        dienblad.voegToe(new Artikel(artikelen[x], artikelprijzen[tepakken[x]]));
@@ -161,6 +181,7 @@ public class KantineSimulatie {
 
 
             }
+
 
             // verwerk rij voor de kassa
             kantine.verwerkRijVoorKassa();
